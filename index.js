@@ -37,44 +37,37 @@ function playRound(computerMove, humanMove) {
   if (humanMove == "rock" || humanMove == "pepper" || humanMove == "scissors") {
     if (humanMove === computerMove) {
       resultDiv.textContent = 
-        `you move ${humanMove} and computer move ${computerMove}: it's Tie`,
-      ;
+        `you move ${humanMove} and computer move ${computerMove}: it's Tie`;
       humanScore += 1;
       computerScore += 1;
     } else if (computerMove === "rock") {
       if (humanMove === "pepper") {
         resultDiv.textContent = 
-          `you move ${humanMove} and computer move ${computerMove}: you win`,
-        ;
+          `you move ${humanMove} and computer move ${computerMove}: you win`;
         humanScore += 1;
       } else {
         resultDiv.textContent = 
-          `you move ${humanMove} and computer move ${computerMove}: you loose`,
-        ;
+          `you move ${humanMove} and computer move ${computerMove}: you loose`;
         computerScore += 1;
       }
     } else if (computerMove === "pepper") {
       if (humanMove === "rock") {
         resultDiv.textContent = 
-          `you move ${humanMove} and computer move ${computerMove}: You Loose`,
-        ;
+          `you move ${humanMove} and computer move ${computerMove}: You Loose`;
         computerScore += 1;
       } else {
         resultDiv.textContent = 
-          `you move ${humanMove} and computer move ${computerMove}: You Win`,
-        ;
+          `you move ${humanMove} and computer move ${computerMove}: You Win`;
         humanScore += 1;
       }
     } else if (computerMove === "scissors") {
       if (humanMove === "rock") {
         resultDiv.textContent = 
-          `you move ${humanMove} and computer move ${computerMove}: You Win`,
-        ;
+          `you move ${humanMove} and computer move ${computerMove}: You Win`;
         humanScore += 1;
       } else {
         resultDiv.textContent =
-          `you move ${humanMove} and computer move ${computerMove}: You Loose`,
-        ;
+          `you move ${humanMove} and computer move ${computerMove}: You Loose`;
         computerScore += 1;
       }
     }
@@ -83,28 +76,34 @@ function playRound(computerMove, humanMove) {
   }
 }
 
-// function playGame() {
-//   for (let i = 0; i < 5; i++) {
-//     const humanSelection = getHumanChoice();
-//     if (humanSelection === "") {
-//       return;
-//     } else {
-//       const computerSelection = getComputerChoice();
-//       playRound(computerSelection, humanSelection);
+function playGame(humanMove) {
+  for (let i = 0; i < 5; i++) {
+    const humanSelection = humanMove;
+    if (humanSelection === "") {
+      return;
+    } else {
+      const computerSelection = getComputerChoice();
+      playRound(computerSelection, humanSelection);
 
-//       console.log(`You: ${humanScore}, Computer: ${computerScore}`);
-//     }
-//   }
-//   if (humanScore === 0) {
-//     console.log("you didn't played");
-//   } else if (humanScore > computerScore) {
-//     console.log("You Won");
-//   } else if (humanScore < computerScore) {
-//     console.log("You Lost");
-//   } else {
-//     console.log("It's a Tie");
-//   }
-// }
+      console.log(`You: ${humanScore}, Computer: ${computerScore}`);
+    }
+  }
+  if (humanScore === 0) {
+    finalResult.textContent = "you didn't played";
+
+  } else if (humanScore > computerScore) {
+    finalResult.textContent = `you cleared ${humanScore} times and computer cleared 
+                              ${computerScore} times: You Won`;
+
+  } else if (humanScore < computerScore) {
+    finalResult.textContent = `you cleared ${humanScore} times and computer cleared 
+                              ${computerScore} times: You Lost`;
+  
+  } else {
+    finalResult.textContent = `you cleared ${humanScore} times and computer cleared 
+                              ${computerScore} times: It's a Tie`;
+  }
+}
 
 // playGame();
 
@@ -142,5 +141,15 @@ section.appendChild(scissorsButton);
 // Result div
 
 const resultDiv = document.createElement('div');
+const roundResult = document.createElement('p');
+const finalResult = document.createElement('p');
+const restartButton = document.createElement('button');
+
+restartButton.textContent = 'Play Again';
+
+restartButton.addEventListener('click', () => humanScore = 0, computerScore = 0)
 
 section.appendChild(resultDiv);
+resultDiv.appendChild(roundResult);
+resultDiv.appendChild(finalResult);
+resultDiv.appendChild(restartButton);

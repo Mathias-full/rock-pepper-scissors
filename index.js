@@ -105,3 +105,57 @@ function playGame(humanMove) {
 }
 
 playGame();
+
+    finalResult.textContent = `you cleared ${humanScore} times and computer cleared 
+                              ${computerScore} times: It's a Tie`;
+  }
+}
+
+// playGame();
+
+const section = document.querySelector('.section');
+const rockButton = document.createElement('button');
+const pepperButton = document.createElement('button');
+const scissorsButton = document.createElement('button');
+
+rockButton.id = 'rock';
+pepperButton.id = "pepper";
+scissorsButton.id = "scissors";
+
+rockButton.textContent = 'Rock';
+pepperButton.textContent = 'Pepper';
+scissorsButton.textContent = 'Scissors';
+
+rockButton.addEventListener('click', event => {
+  const target = event.target;
+
+  playRound(getComputerChoice(),target.id);
+})
+
+pepperButton.addEventListener('click', event => {
+  const target = event.target;
+
+  playRound(getComputerChoice(),target.id);
+})
+
+scissorsButton.addEventListener('click', event => playRound(getComputerChoice(),event.target.id));
+
+section.appendChild(rockButton);
+section.appendChild(pepperButton);
+section.appendChild(scissorsButton);
+
+// Result div
+
+const resultDiv = document.createElement('div');
+const roundResult = document.createElement('p');
+const finalResult = document.createElement('p');
+const restartButton = document.createElement('button');
+
+restartButton.textContent = 'Play Again';
+
+restartButton.addEventListener('click', () => humanScore = 0, computerScore = 0)
+
+section.appendChild(resultDiv);
+resultDiv.appendChild(roundResult);
+resultDiv.appendChild(finalResult);
+resultDiv.appendChild(restartButton);

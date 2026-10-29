@@ -17,14 +17,14 @@ function getComputerChoice() {
   return computerChoice;
 }
 
-function getHumanChoice() {
-  let humanChoice = prompt("enter your move", "");
-  if (humanChoice === "") {
-    console.log("please enter your move");
-  } else {
-    return humanChoice;
-  }
-}
+// function getHumanChoice() {
+//   let humanChoice = prompt("enter your move", "");
+//   if (humanChoice === "") {
+//     console.log("please enter your move");
+//   } else {
+//     return humanChoice;
+//   }
+// }
 
 function playRound(computerMove, humanMove) {
   computerMove = computerMove.toLowerCase();
@@ -36,45 +36,38 @@ function playRound(computerMove, humanMove) {
 
   if (humanMove == "rock" || humanMove == "pepper" || humanMove == "scissors") {
     if (humanMove === computerMove) {
-      console.log(
-        `you move ${humanMove} and computer move ${computerMove}: it's Tie`,
-      );
+      resultDiv.textContent = 
+        `you move ${humanMove} and computer move ${computerMove}: it's Tie`;
       humanScore += 1;
       computerScore += 1;
     } else if (computerMove === "rock") {
       if (humanMove === "pepper") {
-        console.log(
-          `you move ${humanMove} and computer move ${computerMove}: you win`,
-        );
+        resultDiv.textContent = 
+          `you move ${humanMove} and computer move ${computerMove}: you win`;
         humanScore += 1;
       } else {
-        console.log(
-          `you move ${humanMove} and computer move ${computerMove}: you loose`,
-        );
+        resultDiv.textContent = 
+          `you move ${humanMove} and computer move ${computerMove}: you loose`;
         computerScore += 1;
       }
     } else if (computerMove === "pepper") {
       if (humanMove === "rock") {
-        console.log(
-          `you move ${humanMove} and computer move ${computerMove}: You Loose`,
-        );
+        resultDiv.textContent = 
+          `you move ${humanMove} and computer move ${computerMove}: You Loose`;
         computerScore += 1;
       } else {
-        console.log(
-          `you move ${humanMove} and computer move ${computerMove}: You Win`,
-        );
+        resultDiv.textContent = 
+          `you move ${humanMove} and computer move ${computerMove}: You Win`;
         humanScore += 1;
       }
     } else if (computerMove === "scissors") {
       if (humanMove === "rock") {
-        console.log(
-          `you move ${humanMove} and computer move ${computerMove}: You Win`,
-        );
+        resultDiv.textContent = 
+          `you move ${humanMove} and computer move ${computerMove}: You Win`;
         humanScore += 1;
       } else {
-        console.log(
-          `you move ${humanMove} and computer move ${computerMove}: You Loose`,
-        );
+        resultDiv.textContent =
+          `you move ${humanMove} and computer move ${computerMove}: You Loose`;
         computerScore += 1;
       }
     }
@@ -83,9 +76,9 @@ function playRound(computerMove, humanMove) {
   }
 }
 
-function playGame() {
+function playGame(humanMove) {
   for (let i = 0; i < 5; i++) {
-    const humanSelection = getHumanChoice();
+    const humanSelection = humanMove;
     if (humanSelection === "") {
       return;
     } else {
@@ -96,11 +89,16 @@ function playGame() {
     }
   }
   if (humanScore === 0) {
-    console.log("you didn't played");
+    finalResult.textContent = "you didn't played";
+
   } else if (humanScore > computerScore) {
-    console.log("You Won");
+    finalResult.textContent = `you cleared ${humanScore} times and computer cleared 
+                              ${computerScore} times: You Won`;
+
   } else if (humanScore < computerScore) {
-    console.log("You Lost");
+    finalResult.textContent = `you cleared ${humanScore} times and computer cleared 
+                              ${computerScore} times: You Lost`;
+  
   } else {
     console.log("It's a Tie");
   }
